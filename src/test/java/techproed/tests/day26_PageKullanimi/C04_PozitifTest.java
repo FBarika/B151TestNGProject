@@ -32,7 +32,7 @@ public class C04_PozitifTest {
         Assert.assertTrue(rentalPage.loginVerify.getText().contains("Jack"));
 
         //Sayfayi kapatiniz
-        //Driver.closeDriver();
+          Driver.closeDriver();
     }
 
 

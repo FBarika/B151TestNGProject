@@ -20,8 +20,14 @@ public class BlueRentalPage {
     @FindBy(xpath = "(//*[@type='button'])[1]")
     public WebElement loginVerify;
 
+    @FindBy(xpath = "//*[@role='alert']")
+    public WebElement mesajVerify;
 
+    @FindBy(xpath = "//*[.='Logout']")
+    public WebElement logOut;
 
+    @FindBy(xpath = "//*[.='OK']")
+    public WebElement okAlert;
 
 
 
