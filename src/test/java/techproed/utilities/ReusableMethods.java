@@ -1,4 +1,5 @@
 package techproed.utilities;
+
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -14,6 +15,7 @@ import java.util.Date;
 import java.util.List;
 
 public class ReusableMethods {
+
 
     //HARD WAIT METHOD
     public static void bekle(int saniye) {
@@ -102,9 +104,9 @@ public class ReusableMethods {
     }
 
     //Tüm Sayfa ScreenShot
-    public static void tumSayfaResmi(String name) {
+    public static void tumSayfaResmi() {
         String tarih = new SimpleDateFormat("_hh_mm_ss_ddMMyyyy").format(new Date());
-        String dosyaYolu = "TestOutput/screenshot/screenshot" +tarih+name+ ".png";
+        String dosyaYolu = "TestOutput/screenshot/screenshot"+tarih+".png";
         TakesScreenshot ts = (TakesScreenshot) Driver.getDriver();
         try {
             FileUtils.copyFile(ts.getScreenshotAs(OutputType.FILE), new File(dosyaYolu));
@@ -124,6 +126,7 @@ public class ReusableMethods {
             throw new RuntimeException(e);
         }
     }
+
 
     //WebTable
     public static void printData(int satir, int sutun) {
@@ -177,4 +180,6 @@ public class ReusableMethods {
         String attribute_Value = (String) js.executeScript("return document.getElementById('" + id + "')." + attributeName);
         System.out.println("Attribute Value: = " + attribute_Value);
     }
+
+
 }

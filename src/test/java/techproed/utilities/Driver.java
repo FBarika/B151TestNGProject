@@ -3,77 +3,78 @@ package techproed.utilities;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
-import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.safari.SafariDriver;
 
 import java.time.Duration;
+/*
+POM(Page Object Model)
+    Test senaryolarının daha az kod ile yazılmasına ve bakımının daha kolay yapılmasına
+olanak sağlayan yazılım test yöntemidir. TestNG de ve CUCUMBER da POM kalıbını kullanırız
+ */
 
 public class Driver {
-    private Driver (){
+    private  Driver(){
         /*
-        Driver classindan obje olusturmanin önüne gecebilmek icin default constructor i private
-        yaparak bunu engellemis oluruz.
-        Bu kaliba da Singleton pattern denir.
+        Driver class'ından obje oluşturmanın önüne geçmek için
+        default constructor'ı private yaparak bunun önüne geçebiliriz
          */
     }
-    /*
-    POM(Page Object Model)
-            Test senaryolarinin daha az kod ile yazilmasina ve bakiminin daha kolay yapilmasina olanak saglayan
-            yazilim test yöntemidir.TestNG ve cucumber frameworklerinde POMkalini kullanilir.
-     */
-
     static WebDriver driver;
-    public static WebDriver getDriver(){//--> Driver'a deger atanmamissa
-        /*
-        Driver'i her cagirdigimizda yeni bir pencere acilmasinin önüne gecmek icin if blogu icinde;
-        eger driver'deger ATANMAMISA deger ata, eger deger atanmissa driver'a ayni sayfada return et.
-        */
-        /*
-        .properties dosyasina key olarak browser ve degerini asagida olusturdugumuz switch caselerden birini seceriz
-        ve sectigimiz driver calisir.
-         Testlerin baska browser'larda ne sonuc veriyor test etmek gerekebilir.
-         */
+    /*
+             Driver'i her cagirdigimizda yeni bir pencere acilmasinin onune gecmek icin if blogu icinde Eger driver'a
+             deger atanmamissa deger ata , eger deger atanmissa Driver'i ayni sayfada return et
+             */
+    public static WebDriver getDriver() {
+        if (driver == null) {
 
-        if(driver==null){//-->Driver'a deger atanmamissa
-            switch(ConfigReader.getProperty("browser")){
-                case "chrome":
-                    WebDriverManager.chromedriver().setup();
-                    ChromeOptions opt = new ChromeOptions();
-                    opt.addArguments("--lang=en");
-                    driver = new ChromeDriver(opt);
-                    break;
-                case "edge":
-                    WebDriverManager.edgedriver().setup();
-                    EdgeOptions opt1 = new EdgeOptions();
-                    opt1.addArguments("--lang=en");
-                    driver = new EdgeDriver(opt1);
-                    break;
-                default :
-                    WebDriverManager.chromedriver().setup();
-                    ChromeOptions opt2 = new ChromeOptions();
-                    opt2.addArguments("--lang=en");
-                    driver = new ChromeDriver(opt2);
-            }
+         switch (ConfigReader.getProperty("browser")){
+             case "chrome":
+                WebDriverManager.chromedriver().setup();
+                driver = new ChromeDriver();
+                break;
+             case "edge":
+                 WebDriverManager.edgedriver().setup();
+                 driver = new EdgeDriver();
+                 break;
+             case "firefox":
+                 WebDriverManager.firefoxdriver().setup();
+                 driver = new FirefoxDriver();
+                 break;
+             case "safari":
+                 WebDriverManager.safaridriver().setup();
+                 driver = new SafariDriver();
+                 break;
+             default:
+                 WebDriverManager.chromedriver().setup();
+                 driver = new ChromeDriver();
+
+         }
+
+
 
             driver.manage().window().maximize();
             driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
         }
+
         return driver;
     }
 
-    public static void closeDriver(){
-        if (driver!=null){//--> Driver'a deger atanmissa, bos degilse
+
+    public static void closeDriver() {
+        if(driver != null){//-->driver'a deger ATANMISSA
             driver.close();
-           driver=null;//Driver'i kapattiktan sonra bosalt.
+            driver = null;//-->driver'i kapattiktan sonra bosalt
         }
     }
-    public static void quitDriver(){
-        if (driver!=null){//--> Driver'a deger atanmissa, bos degilse
+
+
+    public static void quitDriver() {
+        if (driver != null) {//-->driver'a deger ATANMISSA
             driver.quit();
-            driver=null;//Driver'i kapattiktan sonra bosalt.
+            driver = null;//-->driver'i kapattiktan sonra bosalt
         }
     }
 }
+
