@@ -11,7 +11,7 @@ import techproed.utilities.ReusableMethods;
 
 public class C04_PozitifTest {
 
-    @Test
+    @Test(groups = "smoke")
     public void test01() {
         //Acceptance Criteria:
         //Admin olarak, uygulamaya giriş yapabilmeliyim
