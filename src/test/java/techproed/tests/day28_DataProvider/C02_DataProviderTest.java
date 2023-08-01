@@ -32,7 +32,7 @@ public class C02_DataProviderTest {
         googlePage.googleSuche.click();
 
         //Her arama icin sayfa resmi alalim
-        ReusableMethods.tumSayfaResmi();
+        ReusableMethods.tumSayfaResmi(araclar);
 
         //Sayfayi kapatalim.
         Driver.closeDriver();

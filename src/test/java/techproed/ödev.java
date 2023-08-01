@@ -142,7 +142,8 @@ public class TC03 {
         //ADD TO CART' butonuna tikla
         page.addCart.click();
         ReusableMethods.bekle(2);
-        //Arama kutusunda 'kazak' arat.
+
+        //Arama kutusunda configuration.properties'teki ürünü arat.
         page.aramaKutusu.sendKeys(ConfigReader.getProperty("aramaKutusundaAratilacakÜrün"), Keys.ENTER);
 
         //ilk cikan ürüne tikla
@@ -157,7 +158,7 @@ public class TC03 {
         page.cartIkonu.click();
         ReusableMethods.bekle(2);
 
-        //Secilen ürünlerin sepete eklendigini dogrula
+        //Secilen ürünlerin sepette göründügünü dogrula
         Assert.assertTrue(page.sepettekiIlkUrun.isDisplayed());
 
         Assert.assertTrue(page.sepettekiIkinciUrun.isDisplayed());
@@ -165,11 +166,13 @@ public class TC03 {
         //CHECKOUT' butonuna tikla
         page.checkoutButonu.click();
 
-        //Order Complete' sayfasinda alinacak ürünlerin oldugunu dogrula.
+        //Order Complete' sayfasinda alinacak ürünlerin göründügünü dogrula.
         Assert.assertTrue(page.orderSayfasiIlkÜrün.isDisplayed());
         Assert.assertTrue(page.orderSayfasiIkinciÜrün.isDisplayed());
 
-        //First Name' ve 'Last Name' kutusuna sirasiyla isim ve soyisim gir
+        //'First Name' ve 'Last Name' kutusunu temizle ve sirasiyla isim ve soyisim gir
+        page.billingUsername.clear();
+        page.billingLastname.clear();
         page.billingUsername.sendKeys(ConfigReader.getProperty("vendorFirstname"), Keys.TAB, ConfigReader.getProperty("vendorLastname"));
 
         //Sayfayi Country ddm görünene kadar scroll yap
@@ -178,7 +181,7 @@ public class TC03 {
         //Country/Region dropdown menüsünden Turkey 'i sec
         ReusableMethods.ddmVisibleText(page.ddmUlke, "Turkey");
 
-        //Sirasiyla Stress address, Postcode/ZIP, Town/Cty ,Phone kutularini doldur.
+        //Adress kutusunu temizle ve sirasiyla Stress address, Postcode/ZIP, Town/Cty ,Phone kutularini doldur.
         page.billingAddress.clear();
         page.billingAddress.sendKeys(ConfigReader.getProperty("billingAddress"), Keys.TAB, Keys.TAB,
                 ConfigReader.getProperty("billingPostcode"), Keys.TAB, ConfigReader.getProperty("billingTown"),
@@ -186,7 +189,7 @@ public class TC03 {
 
         ReusableMethods.bekle(2);
 
-        //Sayfayi province dropdown görünene kadar scroll yap
+        //Sayfayi totalAmount görünene kadar scroll yap
         ReusableMethods.scroll(page.totalAmount);
 
         //Province' dropdown menüsünden sehir sec.
@@ -194,9 +197,6 @@ public class TC03 {
 
         //Email' kutusuna otomatik olarak mailin geldigini dogrula.
         Assert.assertEquals(page.billingEmail.getAttribute("value"), ConfigReader.getProperty("vendorEmail"));
-
-        //Sayfayi totalAmount a scroll yap
-        //ReusableMethods.scroll(page.totalAmount);
 
         //Toplam ödenecek olan miktarin göründügünü dogrula.
         Assert.assertTrue(page.totalAmount.isDisplayed());
@@ -259,7 +259,7 @@ public class TC03 {
         //ADD TO CART' butonuna tikla
         page.addCart.click();
         ReusableMethods.bekle(2);
-        //Arama kutusunda 'kazak' arat.
+        //Arama kutusunda configuration.properties'teki ürünü arat.
         page.aramaKutusu.sendKeys(ConfigReader.getProperty("aramaKutusundaAratilacakÜrün"), Keys.ENTER);
 
         //ilk cikan ürüne tikla
@@ -274,7 +274,7 @@ public class TC03 {
         page.cartIkonu.click();
         ReusableMethods.bekle(2);
 
-        //Secilen ürünlerin sepete eklendigini dogrula
+        //Secilen ürünlerin sepette göründügünü dogrula
         Assert.assertTrue(page.sepettekiIlkUrun.isDisplayed());
 
         Assert.assertTrue(page.sepettekiIkinciUrun.isDisplayed());
@@ -282,16 +282,18 @@ public class TC03 {
         //CHECKOUT' butonuna tikla
         page.checkoutButonu.click();
 
-        //Order Complete' sayfasinda alinacak ürünlerin oldugunu dogrula.
+        //Order Complete' sayfasinda alinacak ürünlerin göründügünü dogrula.
         Assert.assertTrue(page.orderSayfasiIlkÜrün.isDisplayed());
         Assert.assertTrue(page.orderSayfasiIkinciÜrün.isDisplayed());
 
-        //First Name' ve 'Last Name' kutusuna  otomatik girilen isim ve soyisimleri sil.
+        //'First Name' ve 'Last Name' kutusuna  otomatik girilen isim ve soyisimleri sil.
         page.billingUsername.clear();
         page.billingLastname.clear();
 
-        //Country/Region dropdowm menüsünden Turkey 'i sec
+        //Sayfayi firstname kadar scroll yap
         ReusableMethods.scroll(page.billingUsername);
+
+        //Country/Region dropdowm menüsünden Turkey 'i sec
         ReusableMethods.bekle(2);
         ReusableMethods.ddmVisibleText(page.ddmUlke,"Turkey");
 
@@ -301,9 +303,8 @@ public class TC03 {
         page.billingPostcode.clear();
         page.billingPhone.clear();
 
-        //Province' dropdown menüsünden sehir secme
+        //Sayfayi sehir dropdown a kadar scroll yap.
         ReusableMethods.scroll(page.ddmSehir);
-
 
         //Email' kutusuna otomatik girilen emaili sil
         page.billingEmail.clear();
@@ -327,6 +328,9 @@ public class TC03 {
         Assert.assertTrue(page.requiredYazi6.isDisplayed());
         Assert.assertTrue(page.requiredYazi7.isDisplayed());
         Assert.assertTrue(page.requiredYazi8.isDisplayed());
+
+
+
 
 }
      */
